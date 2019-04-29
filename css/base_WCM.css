@@ -1,0 +1,64 @@
+/*************************************
+*		for WCM css
+**************************************/
+body.index.index_WCM #main{width:100%;}
+body.index.index_WCM #header{padding:20px 0 0 0;height:60px;}
+body.index.index_WCM #header .index_logo{margin-left:15px;height:44px;margin-top:0;}
+body.index.index_WCM #header .login_info{
+	background:url(../img/layout/login_info.png) no-repeat left 3px;
+	padding:0 0 0 22px; line-height:2em;margin:5px 10px 0 0;
+	display:inline-block;*zoom: 1;*display:inline;float:right;color:#666;}
+.WCM_header{margin-left:230px;}
+.WCM_header h1{
+	background:#f0fcf4;border-radius:50px; 
+	padding:6px 20px;margin-top:3px;color:#007122;
+	display:inline-block;font-size:16px;}
+/*WCM_idx_tb*/
+.WCM_idx_tb .WCM_tr .WCM_td.wid_25per{width:310px;+width:235px;}
+.WCM_idx_tb .WCM_tr .WCM_td.wid_500px{+width:500px;+padding-left:15px;}
+.WCM_idx_tb{display:table;width:100%;border-top:1px solid #ccc; clear:both;}
+.WCM_idx_tb .WCM_tr{display:table-row;}
+.WCM_idx_tb .WCM_tr .WCM_td{
+	display:table-cell;
+	+display:inline-block;*zoom:1;*display:inline;
+	vertical-align:top;}
+.WCM_idx_tb .menu_tree{
+	background: url(../img/layout/WCM_menu_bg.jpg) repeat-x top;
+	overflow-x:auto;overflow-y:scroll;+overflow-y:scroll;
+	height:540px;+height:530px;height:530px \0;
+	padding:5px 15px 5px 5px;width:280px;+width:235px;}
+.WCM_idx_tb .menu_tree .tree_list{/*for mango*/
+	background:url(../js/jquery/jstree/default/data.png) no-repeat left 2px;
+	padding: 4px 2px 4px 18px;margin-left:10px;}
+.path{padding:5px 5px 2px 0px;}
+.WCM_idx_tb .WCM_con .btnBlock{padding:0;margin:3px 0 5px 0;text-align:left;}
+.WCM_idx_tb .WCM_con .btnBlock a:first-child{margin-left:0;}
+.WCM_idx_tb .WCM_con{padding:5px 5px 0 5px; display:block; width:98%;}
+.box_border{border:10px solid #f1f1f1;background: url(../img/layout/WCM_menu_bg.jpg) repeat-x top;}
+.box_border .WCM_idx_tb{border:0;}
+.box_border .WCM_idx_tb .WCM_con{ height:auto;}
+.box_border .btnBlock{ margin:0; padding-top:5px;background:#f1f1f1;}
+/****	 WCM_popup   *****/
+.WCM_popup{
+	overflow:auto;
+	padding:10px 5px 5px 5px;
+	background:url(../img/layout/body_index_bg.gif) repeat-x top;}
+.WCM_popup #header{padding:5px 0 0 5px;height:50px; border-bottom:1px solid #f1f1f1;}
+.WCM_popup .page_tit{ display:block;}
+.WCM_popup #header .index_logo{ margin-top:0; height:40px;}
+.WCM_popup .WCM_header h1{ font-size:13px;}
+.WCM_popup #content{min-height:200px;}
+.WCM_popup .WCM_idx_tb .menu_tree{height:400px;}
+.pop_frame{overflow:auto;max-height:none;height:auto;}
+/*************************************
+*		jquery.dataTables
+**************************************/
+table.dataTable thead{background:#f1f9ef url(../img/table/tb1_hd.gif) repeat-x bottom;}
+table.dataTable.protal_tb1 thead .sorting.hd{
+	background:#f1f9ef url(../img/table/tb1_hd_nor.gif) no-repeat right center;}
+table.dataTable.protal_tb1 thead .sorting_asc.hd{
+	background:#f1f9ef url(../img/table/tb1_hd_top.gif) no-repeat right center;}
+table.dataTable.protal_tb1 thead .sorting_desc.hd{
+	background:#f1f9ef url(../img/table/tb1_hd_btm.gif) no-repeat right center;}
+table.dataTable.protal_tb1 thead .sorting_disabled.hd{
+	background:#f1f9ef url(../img/table/tb1_hd.gif) repeat-x bottom;}

@@ -1,0 +1,245 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+<html>
+<head>
+	
+	
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=3.0,user-scalable=1">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+	<title>國泰員工入口網站</title>
+	<link rel="stylesheet" type="text/css" media="all" href="./jquery/validate/css/screen.css">
+	<link rel="stylesheet" type="text/css" media="all" href="./css/base.css">
+	<link rel="stylesheet" type="text/css" media="all" href="./css/base_WCM.css">
+	<script type="text/javascript" src="./jquery/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="./jquery/validate/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="./jquery/validate/localization/messages_zh_TW.min.js"></script>
+	<script type="text/javascript" src="./jquery/validate/jquery.validate.addMethod.js"></script>
+	<script type="text/javascript" src="./jquery/json/jquery.json-2.4.min.js"></script>
+	<!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="../css/base_ie.css"/>
+	<![endif]-->
+
+	<script type="text/javascript">
+
+		// IPHONE	(1, "iPhone")
+		// IPAD		(2, "iPad"	)
+		// IPOD		(3, "iPod"	)
+		// ANDROID	(4, "android")
+
+		var deviceType = "desktop";
+
+		if (/ipad/i.test(navigator.userAgent.toLowerCase())) {
+			deviceType = "2";
+		}
+		else if (/iphone/i.test(navigator.userAgent.toLowerCase())) {
+			deviceType = "1";
+		}
+		else if (/ipod/i.test(navigator.userAgent.toLowerCase())) {
+			deviceType = "3";
+		}
+		else if (/android/i.test(navigator.userAgent.toLowerCase())) {
+			deviceType = "4";
+		}
+		else {
+			// 電腦瀏覽
+			deviceType = "5";
+		}
+		
+
+ 
+
+	</script>
+</head>
+<body>
+<form id="login" method="post" action="/eai/ZPWeb/login">
+	<div class="login_page">
+		<div id="header">
+			<div class="index_logo">
+			</div>
+		</div>
+		<!--/header-->
+		<div id="content">
+			<div class="login_form">
+				<div class="login_tit">
+					登入 CRM 客戶關係管理
+				</div>
+				<!-- <div class="txt_info dis_block">
+					此為共用登入頁，業專登入後將進入國泰業專入口 網站
+				</div>
+				<div class="txt_info dis_block">請輸入登入資料，如忘記密碼
+					<a id="forgetPassword" class="link1">請點我</a>。
+				</div> -->
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="protal_tb2">
+					<tr>
+						<td width="33%" class="hd">帳號：</td>
+						<td><input id="UID" name="username" type="text" maxlength="10"></td>
+					</tr>
+					<tr>
+						<td class="hd">密碼：</td>
+						<td>
+							<input id="KEY" name="password" type="password">
+						</td>
+					</tr>
+				</table>
+				<div id="ERR_MESG" class="error_msg" style="display:none"></div>
+				<div class="btnBlock">
+					<a class="btn1" id="btnLogin">登入</a>
+				</div>
+			</div>
+		</div>
+		<!--login_page-->
+		<div id="footer">
+			<span>國泰金控版權所有 2015 Copyright © Cathay Holdings All Right Reserved.  建議瀏覽版本： IE8 以上 1024x768解析度為佳</span>
+		</div>
+	</div>
+	<input type="hidden" name="mobileError" value="">
+	<input type="hidden" id="deviceType" name="deviceType">
+</form>
+<script type="text/javascript">
+	// <![CDATA[
+	var errMesg = '';
+	var app = function () {
+
+		//表單ID
+		var formId = '#login';
+
+		// 表單欄位檢核
+		// validate defined
+		$(formId).validate({
+			ignore: '',
+			rules: {
+				UID: {
+					required: true,
+					maxlength: 10,
+					minlength: 10
+				},
+				KEY: {
+					required: true,
+					maxlength: 10,
+					minlength: 8
+				}
+			},
+			messages: {
+				UID: {
+					required: "請輸入必填欄位",
+					maxlength: '身分證字號長度不符',
+					minlength: '身分證字號長度不符'
+				},
+				KEY: {
+					required: "請輸入必填欄位",
+					maxlength: '密碼長度不符',
+					minlength: '密碼長度不符'
+				}
+			}
+		});
+
+		var showError = function () {
+
+			if (errMesg != '') {
+
+				$('#ERR_MESG').text(errMesg);
+
+				$('#ERR_MESG').show();
+			}
+		};
+
+		var doLogin = function () {
+			$('#deviceType').val(deviceType);
+			if($('#UID').val()!='' && $('#KEY').val()!=''){
+				$(formId).submit();
+			}
+		};
+		
+		//clean portal server cookie
+		var cleanCookies=function(){
+			document.cookie= "LtpaToken=xxx;expires=Sat, 01-Jan-2000 00:00:00 GMT;path=/;domain=.cathaylife.com.tw";
+			document.cookie= "LtpaToken2=xxx;expires=Sat, 01-Jan-2000 00:00:00 GMT;path=/;domain=.cathaylife.com.tw";
+		};
+
+		// bundle page event
+		var bundlePageEvent = function () {
+			//儲存
+			$('#forgetPassword').on('click', function () {
+				var url = "/ZPWeb/forgetPassword.jsp";
+
+
+				//設定開啟視窗的寬度
+				var w_width = 800;
+				//設定開啟視窗的高度
+				var w_height = 600;
+				//計算螢幕與開啟視窗的寬度
+				var x = (screen.width - w_width) / 2;
+				//計算螢幕與開啟視窗的高度
+				var y = (screen.height - w_height) / 2;
+				//將新獲取的設定用字串方式先串起來
+				var ww = 'scrollbars=1,width=' + w_width + ',height=' + w_height + ',top=' + y + ',left=' + x;
+				//將設定值放入函數中
+				//var openWIN = window.open(url, name, ww);
+				window.open(url);
+
+				// , '', 'scrollbars=1,width=800, height=600')"
+
+
+			});
+
+			//儲存
+			$('#btnLogin').on('click', function () {
+				var $valid = $(formId).valid();
+				if ($valid) {
+					$('#UID').val($('#UID').val().toUpperCase());
+					doLogin();
+				}
+			});
+			
+			$(formId).on('keypress', function(e) {
+				var code = e.keyCode || e.which;
+				if (code == 13) {
+					$('#btnLogin').trigger('click');
+				}
+			});
+			
+			$('#UID').on('keyup', function () {
+				if (this.value.length==10){
+					$('#KEY').focus();
+				}
+			});
+			
+			$('#KEY').on('focus',function(){
+				this.value='';
+			});
+
+			$('#UID').focus();
+			$('#KEY').attr('autocomplete', 'off');
+		};
+
+		return {
+			init: function () {
+
+				$('#ERR_MESG').hide();
+				cleanCookies();
+				// 表單事件初始化
+				bundlePageEvent();
+				showError();
+			}
+		};
+	}();
+
+	$(document).ready(app.init);
+	// ]]>
+</script>
+</body>
+</html>
+
+
+<SCRIPT type="text/javascript">
+/*<![CDATA[*/ 
+document.cookie = "IV_JCT=%2Feai; path=/";
+/*]]>*/ 
+</SCRIPT>
